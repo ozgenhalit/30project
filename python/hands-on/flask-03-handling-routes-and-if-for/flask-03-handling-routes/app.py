@@ -45,7 +45,7 @@ def greet_admin():
 
 @app.route('/<name>')
 def greeting(name):
-    return render_template('greet.html', name_html = name)
+    return render_template('greet.html', name_html = 'name')
 
 @app.route('/list10')
 def list10():
