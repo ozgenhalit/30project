@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This YAML (YAML Ain't Markup Language) file created for launching instance.
+
+Resources:
+  steviec2:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      ImageId: ami-02e136e904f3da870
+      InstanceType: t2.micro  
+      KeyName: 'firstkey.pem'
+      SecurityGroups:
+        - firstsecgrp
+      Tags:
+        - Key: Name
+        - Value: Cloudformation-ec2

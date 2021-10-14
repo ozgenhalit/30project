@@ -1,0 +1,46 @@
+  
+Resources:
+  stevie3ec2:
+    Type: AWS::EC2::Instance
+    Properties:
+      
+      AvailabilityZone: us-east-1a
+      
+      ImageId: ami-02e136e904f3da870
+      InstanceType: t2.micro
+      
+      SecurityGroups:
+        - !Ref SSHSG
+        - !Ref ServerSG 
+      
+  MYeip:
+    Type: AWS::EC2::EIP
+    Properties:  
+      InstanceId: !Ref stevie3ec2
+
+  SSHSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: created forfirst sg# Required
+      GroupName: fisrt sg
+      SecurityGroupIngress:
+        - IpProtocol: tcp 
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        
+  ServerSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: created for second sg# Required
+      GroupName: second sg
+      SecurityGroupIngress:
+        - IpProtocol: tcp 
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp 
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 192.168.1.1/32
+      
