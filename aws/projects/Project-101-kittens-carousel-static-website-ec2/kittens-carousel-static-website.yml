@@ -1,8 +1,11 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
-This CloudFormation Template was written for running Kittens Carousel Static Website on EC2. Kittens Carousel Static Website will be deployed on Amazon Linux 2 (XXXXXXXXXXXXXX) EC2 Instance with custom security group which allows http connections on port 80 and ssh port 22 from anywhere. Kittens Carousel Static Website 
-is downloaded from my Public Github repository, then deployed on Apache Web Server.
-  
+  This CloudFormation Template was written for
+  running Kittens Carousel Static Website on EC2.
+  Kittens Carousel Static Website will be deployed on Amazon Linux 2 (ami-02e136e904f3da870)
+  EC2 Instance with custom security group which allows http connections
+  on port 80 and ssh port 22 from anywhere. Kittens Carousel Static Website
+  is downloaded from my Public Github repository, then deployed on Apache Web Server.
 Resources:
   WebServerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -17,7 +20,6 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
-    
   WebServerHost:
     Type: AWS::EC2::Instance
     Properties:
@@ -25,7 +27,7 @@ Resources:
       InstanceType: t2.micro
       KeyName: firstkey
       SecurityGroupIds:
-        - !REF WebServerSecurityGroup
+        - !Ref WebServerSecurityGroup
       Tags:
         - Key: Name
           Value: !Sub Web Server of ${AWS::StackName} Stack
@@ -43,8 +45,7 @@ Resources:
             wget $FOLDER/cat2.jpg
             wget $FOLDER/cat3.png
             systemctl start httpd
-            systemctl enable httpd
-            
+            systemctl enable httpd        
 Outputs:
   WebsiteURL:
     Value: !Sub 
